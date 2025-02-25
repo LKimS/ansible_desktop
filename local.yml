@@ -71,5 +71,5 @@
           
     - name: Install GCC using Homebrew
       command: /home/linuxbrew/.linuxbrew/bin/brew install gcc
-      become: false
+      become: true
       become_user: lkims
