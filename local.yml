@@ -26,10 +26,10 @@
       hosts: localhost
       become: no
       vars:
-        the_user: "{{ velociraptor }}"
+        the_user: "{{ ansible_user_id }}"
       tasks:
         - name: change user shell to zsh 
           become: yes
           user:
-            name: "{{ lkims }}"
+            name: "{{ the_user }}"
             shell: /bin/zsh
