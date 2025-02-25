@@ -63,6 +63,11 @@
       become: false
       become_user: lkims
 
+    - name: Add Homebrew to PATH 2
+      command: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      become: true
+      become_user: lkims
+
     - name: Cleanup Homebrew installation script
       file:
         path: /tmp/homebrew_install.sh
