@@ -47,7 +47,7 @@
       become_user: lkims
 
     - name: Install Homebrew
-      become: false
+      become: true
       become_user: lkims
       shell: |
         /bin/bash /tmp/homebrew_install.sh
