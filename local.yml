@@ -47,10 +47,11 @@
       become_user: lkims
 
     - name: Install Homebrew
-      shell: |
-        /bin/bash /tmp/homebrew_install.sh
       become: false
       become_user: lkims
+      shell: |
+        /bin/bash /tmp/homebrew_install.sh
+
       args:
         creates: /home/linuxbrew/.linuxbrew/bin/brew
 
