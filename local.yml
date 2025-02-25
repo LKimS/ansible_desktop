@@ -1,4 +1,4 @@
-# tasks to complete before running roles
+---
 - hosts: localhost
   connection: local
   become: true
@@ -22,14 +22,7 @@
         name: zsh
         state: present
 
-    - name: set up zsh for user
-      hosts: localhost
-      become: no
-      vars:
-        the_user: "{{ velociraptor }}"
-      tasks:
-        - name: change user shell to zsh 
-          become: yes
-          user:
-            name: "{{ lkims }}"
-            shell: /bin/zsh
+    - name: change user shell to zsh 
+      user:
+        name: lkims
+        shell: /bin/zsh
