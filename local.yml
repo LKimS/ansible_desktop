@@ -74,6 +74,12 @@
       become: true
       become_user: lkims
 
-    - name: insatll htop
+    - name: Install htop using Homebrew
       homebrew:
         name: htop
+        state: present
+      become: true
+      become_user: lkims
+      environment:
+        PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+        HOME: "/home/lkims"
