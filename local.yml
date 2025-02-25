@@ -26,3 +26,48 @@
       user:
         name: lkims
         shell: /bin/zsh
+
+ # New tasks for Homebrew installation
+    - name: Install Homebrew dependencies
+      apt:
+        name:
+          - build-essential
+          - procps
+          - curl
+          - file
+          - git
+        state: present
+
+    - name: Download Homebrew installation script
+      get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        dest: /tmp/homebrew_install.sh
+        mode: '0755'
+      become: false
+
+    - name: Install Homebrew
+      command: /bin/bash /tmp/homebrew_install.sh
+      become: false
+      become_user: lkims
+      args:
+        creates: /home/lkims/.linuxbrew
+
+    - name: Add Homebrew to PATH
+      lineinfile:
+        path: /home/lkims/.zshrc
+        line: 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+        state: present
+      become: false
+      become_user: lkims
+
+    - name: Cleanup Homebrew installation script
+      file:
+        path: /tmp/homebrew_install.sh
+        state: absent
+      become: false
+
+          
+    - name: Install GCC using Homebrew
+      command: /home/linuxbrew/.linuxbrew/bin/brew install gcc
+      become: false
+      become_user: lkims
