@@ -44,13 +44,15 @@
         dest: /tmp/homebrew_install.sh
         mode: '0755'
       become: false
+      become_user: lkims
 
     - name: Install Homebrew
-      command: /bin/bash /tmp/homebrew_install.sh
+      shell: |
+        /bin/bash /tmp/homebrew_install.sh
       become: false
       become_user: lkims
       args:
-        creates: /home/lkims/.linuxbrew
+        creates: /home/linuxbrew/.linuxbrew/bin/brew
 
     - name: Add Homebrew to PATH
       lineinfile:
@@ -65,7 +67,6 @@
         path: /tmp/homebrew_install.sh
         state: absent
       become: false
-
           
     - name: Install GCC using Homebrew
       command: /home/linuxbrew/.linuxbrew/bin/brew install gcc
