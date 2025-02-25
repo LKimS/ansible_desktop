@@ -76,7 +76,10 @@
 
     - name: Install htop using Homebrew
       homebrew:
-        name: htop
+        name: 
+          - htop
+          - ripgrep
+          - tlrc
         state: present
       become: true
       become_user: lkims
