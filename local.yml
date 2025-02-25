@@ -4,12 +4,32 @@
   become: true
 
   tasks:
+    - name: add ansible user
+      user:
+        name: velociraptor
+        system: yes
+
+    - name: set up sudo for ansible user
+      copy:
+        src: files/sudoer_velociraptor
+        dest: /etc/sudoers.d/velociraptor
+        owner: root
+        group: root
+        mode: 0440
+
     - name: Install Zsh
       apt:
         name: zsh
         state: present
 
-    - name: Change default shell to Zsh
-      user:
-        name: "{{ lkims }}"
-        shell: /bin/zsh
+    - name: set up zsh for user
+      hosts: localhost
+      become: no
+      vars:
+        the_user: "{{ velociraptor }}"
+      tasks:
+        - name: change user shell to zsh 
+          become: yes
+          user:
+            name: "{{ lkims }}"
+            shell: /bin/zsh
