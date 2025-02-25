@@ -78,3 +78,7 @@
       command: /home/linuxbrew/.linuxbrew/bin/brew install gcc
       become: true
       become_user: lkims
+
+    - name: insatll htop
+      homebrew:
+        name: htop
