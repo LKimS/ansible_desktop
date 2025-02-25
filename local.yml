@@ -60,6 +60,7 @@
         path: /home/lkims/.zshrc
         line: 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
         state: present
+      command: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       become: false
       become_user: lkims
 
