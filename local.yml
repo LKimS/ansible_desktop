@@ -1,0 +1,21 @@
+# tasks to complete before running roles
+- hosts: all
+  tags: always
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu", "Pop!_OS"]
+
+  tasks:
+    - name: Install Zsh
+      apt:
+        name: zsh
+        state: present
+
+    - name: Change default shell to Zsh
+      user:
+        name: "{{ lkims }}"
+        shell: /bin/zsh
