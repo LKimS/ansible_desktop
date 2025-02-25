@@ -1,8 +1,8 @@
 # tasks to complete before running roles
-- hosts: all
-  tags: always
+- hosts: localhost
+  connection: local
   become: true
-  
+
   tasks:
     - name: Install Zsh
       apt:
