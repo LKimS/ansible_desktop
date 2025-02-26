@@ -16,7 +16,7 @@
       changed_when: "'app/' in flatpak_update_output.stdout"
 
     - name: Update Homebrew and upgrade all packages
-      community.general.homebrew:
+      homebrew:
         update_homebrew: true
         upgrade_all: true
 
