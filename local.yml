@@ -82,6 +82,10 @@
           - ripgrep
           - tlrc
           - bat
+          - zoxide
+          - fzf
+          - zsh-autosuggestions
+          - zsh-syntax-highlighting
         state: present
       become: true
       become_user: lkims
