@@ -154,6 +154,13 @@
         key: "/org/gnome/desktop/interface/clock-format"
         value: "'24h'"
 
+    - name: Remove mouse acceleration
+      become_user: lkims
+      dconf:
+        key: "/org/gnome/desktop/peripheral/mouse/accel-profrile"
+        value: "'flat'"
+
+
     - name: Add Flathub repository
       community.general.flatpak_remote:
         name: flathub
