@@ -47,7 +47,7 @@
     - name: Ensuer sodoers.d directory exists
       file: 
         path: /etc/sudoers.d
-        state: direcoty
+        state: directory
         mode: '0755'
       when: not homebrew_installed.stat.exists
 
