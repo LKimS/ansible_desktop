@@ -36,6 +36,7 @@
           - curl
           - file
           - git
+          - python3-psutil
         state: present
 
     - name: Download Homebrew installation script
