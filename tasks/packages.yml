@@ -52,7 +52,7 @@
     state: present
 
 - name: Install packages using Flatpak
-  flatpak:
+  community.general.flatpak:
     name: 
       - com.brave.Browser
       - com.valvesoftware.Steam
