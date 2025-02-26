@@ -112,11 +112,12 @@
         path: "/usr/local/share/fonts/custom"
         state: directory
         mode: '0755'
-        
-    - name: copy font files file
+
+    - name: Copy entire fonts directory
       copy:
-        src: "files/fonts/MesloLGS NF Italic.ttf"
-        dest: "/usr/local/share/fonts/custom/MesloLGS NF Italic.ttf"
+        src: "files/fonts/"
+        dest: "/usr/local/share/fonts/custom/"
         owner: root
         group: root
+        mode: '0644'
     
