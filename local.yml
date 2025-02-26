@@ -39,43 +39,6 @@
           - python3-psutil
         state: present
 
-    - name: Check if homebrew is already installed
-      stat:
-        path: /home/linuxbrew/.linuxbrew/bin/brew
-      register: homebrew_installed
-
-    - name: Download Homebrew installation script
-      get_url:
-        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-        dest: /tmp/homebrew_install.sh
-        mode: '0755'
-      become: false
-      become_user: lkims
-      when: not homebrew_installed.stat.exists
-
-    - name: Run Homebrew installer
-      become: no
-      become_user: velociraptor
-      shell: /bin/bash /tmp/homebrew_install.sh
-      when: not homebrew_installed.stat.exists
-
-    - name: Cleanup Homebrew installation script
-      file:
-        path: /tmp/homebrew_install.sh
-        state: absent
-      become: false
-      when: not homebrew_installed.stat.exists
-
-    - name: Display homebrew installation status
-      debug:
-        msg: "Homebrew is already installed"
-      when: homebrew_installed.stat.exists
-
-    - name: Display homebrew installation completion message
-      debug:
-        msg: "Homebrew has been installed"
-      when: not homebrew_installed.stat.exists
-
     - name: Install htop using Homebrew
       homebrew:
         name: 
