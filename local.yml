@@ -143,4 +143,16 @@
       owner: lkims
       group: lkims
 
+    - name: set 24h
+      become_user: lkims
+      dconf:
+        key: "/org/gtk/settings/file-chooser/clock-format"
+        value: "'24h'"
+
+    - name: set 24h
+      become_user: lkims
+      dconf:
+        key: "/org/gnome/desktop/interface/clock-format"
+        value: "'24h'"
+
     
