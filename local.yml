@@ -87,6 +87,7 @@
           - zsh-autosuggestions
           - zsh-syntax-highlighting
           - thefuck
+          - fastfetch
         state: present
       become: true
       become_user: lkims
