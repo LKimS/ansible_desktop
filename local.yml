@@ -138,10 +138,10 @@
 
     - name: copy .zshrc file
       copy:
-      src: files/zshrc
-      dest: /home/lkims/.zshrc
-      owner: lkims
-      group: lkims
+        src: files/zshrc
+        dest: /home/lkims/.zshrc
+        owner: lkims
+        group: lkims
 
     - name: set 24h
       become_user: lkims
