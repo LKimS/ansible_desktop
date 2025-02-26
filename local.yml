@@ -164,8 +164,9 @@
 
     - name: Install packages using Flatpak
       flatpak:
-        name: 
-          - com.brave.Browser
-          - com.valvesoftware.Steam
+        name: "{{ item }}"
         state: present
         method: system
+      loop:
+        - com.brave.Browser
+        - com.valvesoftware.Steam
