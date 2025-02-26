@@ -161,7 +161,7 @@
       dconf:
         key: "/org/gnome/desktop/interface/clock-format"
         value: "'24h'"
-        
+
     - name: Add Flathub repository
       flatpak_remote:
         name: flathub
@@ -172,7 +172,7 @@
     - name: Install packages using Flatpak
       flatpak:
         name: 
-        - com.brave.Browser
-        - com.valvesoftware.Steam
+          - com.brave.Browser
+          - com.valvesoftware.Steam
         state: present
         method: system
