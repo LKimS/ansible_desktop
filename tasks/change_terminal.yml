@@ -1,0 +1,37 @@
+- name: Copy p10k config
+  copy:
+    src: "files/p10k.zsh"
+    dest: "/home/lkims/.p10k.zsh"
+    owner: lkims
+    group: lkims
+  become: true
+
+- name: Ensure custom fonts directory exists
+  file:
+    path: "/usr/local/share/fonts/custom"
+    state: directory
+    mode: '0755'
+
+- name: Copy entire fonts directory
+  copy:
+    src: "files/fonts/"
+    dest: "/usr/local/share/fonts/custom/"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Set terminal font
+  become: true
+  become_user: lkims
+  shell: |
+    dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font "'MesloLGS NF 12'"
+    dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-system-font false
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: unix:path=/run/user/1000/bus
+
+- name: copy .zshrc file
+  copy:
+    src: files/zshrc
+    dest: /home/lkims/.zshrc
+    owner: lkims
+    group: lkims

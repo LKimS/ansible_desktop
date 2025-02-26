@@ -1,0 +1,26 @@
+- name: Check if miniconda is installed
+  become_user: lkims
+  stat:
+    path: ~/miniconda3/bin/conda
+  register: miniconda_installed
+
+- name: Download Miniconda installer
+  become_user: lkims
+  get_url:
+    url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    dest: /tmp/miniconda.sh
+    mode: 0755
+  when: not miniconda_installed.stat.exists
+
+- name: Run miniconda installer
+  become_user: lkims
+  shell: /bin/bash /tmp/miniconda.sh -b -u -p ~/miniconda3
+  args:
+    creates: ~/miniconda3
+  when: not miniconda_installed.stat.exists
+
+- name: Clean up conda installer
+  file:
+    path: /tmp/miniconda.sh
+    state: absent
+  when: not miniconda_installed.stat.exists

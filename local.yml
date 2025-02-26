@@ -3,169 +3,20 @@
   connection: local
   become: true
 
+  pre_tasks:
+    - name: update repositories
+      apt:
+        update_cache: yes
+        upgrade: dist
+
   tasks:
     - include: tasks/users.yml
-
-    - name: Install Zsh
-      apt:
-        name: zsh
-        state: present
-
-    - name: change user shell to zsh 
-      user:
-        name: lkims
-        shell: /bin/zsh
-
- # New tasks for Homebrew installation
-    - name: Install Homebrew dependencies
-      apt:
-        name:
-          - build-essential
-          - procps
-          - curl
-          - file
-          - git
-          - python3-psutil
-        state: present
-
-    - name: Install htop using Homebrew
-      homebrew:
-        name: 
-          - gcc
-          - htop
-          - ripgrep
-          - tlrc
-          - bat
-          - zoxide
-          - fzf
-          - zsh-autosuggestions
-          - zsh-syntax-highlighting
-          - thefuck
-          - fastfetch
-          - powerlevel10k
-        state: present
-      become: true
-      become_user: lkims
-      environment:
-        PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
-        HOME: "/home/lkims"
-
-    - name: Copy p10k config
-      copy:
-        src: "files/p10k.zsh"
-        dest: "/home/lkims/.p10k.zsh"
-        owner: lkims
-        group: lkims
-      become: true
-
-    - name: Ensure custom fonts directory exists
-      file:
-        path: "/usr/local/share/fonts/custom"
-        state: directory
-        mode: '0755'
-
-    - name: Copy entire fonts directory
-      copy:
-        src: "files/fonts/"
-        dest: "/usr/local/share/fonts/custom/"
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: Install dconf-cli
-      apt:
-        name: dconf-cli
-        state: present
-
-    - name: Set terminal font
-      become: true
-      become_user: lkims
-      shell: |
-        dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font "'MesloLGS NF 12'"
-        dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-system-font false
-      environment:
-        DBUS_SESSION_BUS_ADDRESS: unix:path=/run/user/1000/bus
-
-    - name: copy .zshrc file
-      copy:
-        src: files/zshrc
-        dest: /home/lkims/.zshrc
-        owner: lkims
-        group: lkims
-
-    - name: set 24h
-      become_user: lkims
-      dconf:
-        key: "/org/gtk/settings/file-chooser/clock-format"
-        value: "'24h'"
-
-    - name: set 24h
-      become_user: lkims
-      dconf:
-        key: "/org/gnome/desktop/interface/clock-format"
-        value: "'24h'"
-
-    - name: Remove mouse acceleration
-      become_user: lkims
-      dconf:
-        key: "/org/gnome/desktop/peripheral/mouse/accel-profrile"
-        value: "'flat'"
+    - include: tasks/packages.yml
+    - include: tasks/miniconda.yml
+    - include: tasks/change_terminal.yml
+    - include: tasks/desktop_env.yml
 
 
-    - name: Add Flathub repository
-      community.general.flatpak_remote:
-        name: flathub
-        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-        method: system
-        state: present
-
-    - name: Install packages using Flatpak
-      flatpak:
-        name: "{{ item }}"
-        state: present
-        method: system
-      loop:
-        - com.brave.Browser
-        - com.valvesoftware.Steam
-        - com.github.iwalton3.jellyfin-media-player
-        - com.discordapp.Discord
-        - com.github.tchx84.Flatseal
-        - com.heroicgameslauncher.hgl
-        - com.mattjakeman.ExtensionManager
-        - com.protonvpn.www
-        - com.rustdesk.RustDesk
-        - com.visualstudio.code
-        - dev.deedles.Trayscale
-        - io.mpv.Mpv
-        - md.obsidian.Obsidian
-        - org.filezillaproject.Filezilla
-        - org.keepassxc.KeePassXC
-        - org.localsend.localsend_app
     
-    - name: Check if miniconda is installed
-      become_user: lkims
-      stat:
-        path: ~/miniconda3/bin/conda
-      register: miniconda_installed
 
-    - name: Download Miniconda installer
-      become_user: lkims
-      get_url:
-        url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-        dest: /tmp/miniconda.sh
-        mode: 0755
-      when: not miniconda_installed.stat.exists
-
-    - name: Run miniconda installer
-      become_user: lkims
-      shell: /bin/bash /tmp/miniconda.sh -b -u -p ~/miniconda3
-      args:
-        creates: ~/miniconda3
-      when: not miniconda_installed.stat.exists
-
-    - name: Clean up conda installer
-      file:
-        path: /tmp/miniconda.sh
-        state: absent
-      when: not miniconda_installed.stat.exists
 

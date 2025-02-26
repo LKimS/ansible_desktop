@@ -1,0 +1,75 @@
+- name: Install apt packages
+  apt:
+    name:
+      # Homebrew dependecies
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+        # For dconf
+      - python3-psutil
+      # other
+      - zsh
+      - htop
+    state: latest
+
+- name: change user shell to zsh 
+  user:
+    name: lkims
+    shell: /bin/zsh
+
+
+- name: Install htop using Homebrew
+  homebrew:
+    name: 
+      # for homebrew post install
+      - gcc 
+      # Terminal applications
+      - ripgrep 
+      - tlrc
+      - bat
+      - zoxide
+      - fzf
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - thefuck
+      - fastfetch
+      - powerlevel10k
+    state: latest
+  become: true
+  become_user: lkims
+  environment:
+    PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+    HOME: "/home/lkims"
+
+
+- name: Add Flathub repository
+  flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    method: system
+    state: present
+
+- name: Install packages using Flatpak
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    method: system
+  loop:
+    - com.brave.Browser
+    - com.valvesoftware.Steam
+    - com.github.iwalton3.jellyfin-media-player
+    - com.discordapp.Discord
+    - com.github.tchx84.Flatseal
+    - com.heroicgameslauncher.hgl
+    - com.mattjakeman.ExtensionManager
+    - com.protonvpn.www
+    - com.rustdesk.RustDesk
+    - com.visualstudio.code
+    - dev.deedles.Trayscale
+    - io.mpv.Mpv
+    - md.obsidian.Obsidian
+    - org.filezillaproject.Filezilla
+    - org.keepassxc.KeePassXC
+    - org.localsend.localsend_app
