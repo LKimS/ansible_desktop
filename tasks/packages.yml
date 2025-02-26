@@ -53,10 +53,7 @@
 
 - name: Install packages using Flatpak
   flatpak:
-    name: "{{ item }}"
-    state: present
-    method: system
-  loop:
+    name: 
     - com.brave.Browser
     - com.valvesoftware.Steam
     - com.github.iwalton3.jellyfin-media-player
@@ -73,3 +70,4 @@
     - org.filezillaproject.Filezilla
     - org.keepassxc.KeePassXC
     - org.localsend.localsend_app
+    state: present
