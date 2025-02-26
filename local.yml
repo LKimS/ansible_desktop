@@ -15,6 +15,11 @@
       register: flatpak_update_output
       changed_when: "'app/' in flatpak_update_output.stdout"
 
+    - name: Update Homebrew and upgrade all packages
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
+
   tasks:
     - include: tasks/users.yml
     - include: tasks/packages.yml
