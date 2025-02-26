@@ -170,8 +170,21 @@
       loop:
         - com.brave.Browser
         - com.valvesoftware.Steam
+        - com.github.iwalton3.jellyfin-media-player
+        - com.discordapp.Discord
+        - com.github.tchx84.Flatseal
+        - com.heroicgameslauncher.hgl
+        - com.mattjakeman.ExtensionManager
+        - com.protonvpn.www
+        - com.rustdesk.RustDesk
+        - com.visualstudio.code
+        - dev.deedles.Trayscale
+        - io.mpv.Mpv
+        - md.obsidian.Obsidian
+        - org.filezillaproject.Filezilla
+        - org.keepassxc.KeePassXC
+        - org.localsend.localsend_app
 
-    - name: Set Brave as default browser
-      become: true
-      become_user: lkims
-      command: xdg-settings set default-web-browser com.brave.Browser.desktop
+
+
+
