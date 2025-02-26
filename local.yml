@@ -10,6 +10,11 @@
         upgrade: dist
         cache_valid_time: 3600
 
+    - name: update flatpak
+      flatpak:
+        state: latest
+        methos: system
+
   tasks:
     - include: tasks/users.yml
     - include: tasks/packages.yml
