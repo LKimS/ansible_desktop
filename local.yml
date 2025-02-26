@@ -162,4 +162,10 @@
         key: "/org/gnome/desktop/interface/clock-format"
         value: "'24h'"
 
-    
+    - name: Install packages using Flatpak
+      flatpak:
+        name: 
+        - com.brave.Browser
+        - com.valvesoftware.Steam
+        state: present
+        method: system
