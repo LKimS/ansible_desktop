@@ -39,6 +39,27 @@
           - python3-psutil
         state: present
 
+    - name: Check if homebrew is already installed
+      stat:
+        path: /home/linuxbrew/.linuxbrew/bin/brew
+      register: homebrew_installed
+
+    - name: Ensuer sodoers.d directory exists
+      file: 
+        path: /etc/sudoers.d
+        state: direcoty
+        mode: '0755'
+      when: not homebrew_installed
+
+    - Name: Add NPOASSWD sodu access for Anisble user
+      lineinfile:
+        path: /etc/soduers.d/ansible-homebrew
+        line: "lkims ALL=(ALL) NOPASSWD: ALL"
+        create: yes
+        validate: 'visodu -cf %s'
+        mode: '0440'
+      when: not homebrew_installed
+
     - name: Download Homebrew installation script
       get_url:
         url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
@@ -46,30 +67,35 @@
         mode: '0755'
       become: false
       become_user: lkims
+      when: not homebrew_installed
 
-    - name: Install Homebrew
-      become: true
+    - name: Run Homebrew installer
+      become: no
       become_user: lkims
-      shell: |
-        /bin/bash /tmp/homebrew_install.sh
-
-      args:
-        creates: /home/linuxbrew/.linuxbrew/bin/brew
+      shell: /bin/bash /tmp/homebrew_install.sh
+      when: not homebrew_installed
 
     - name: Cleanup Homebrew installation script
       file:
         path: /tmp/homebrew_install.sh
         state: absent
       become: false
-          
-    - name: Install GCC using Homebrew
-      command: /home/linuxbrew/.linuxbrew/bin/brew install gcc
-      become: true
-      become_user: lkims
+      when: not homebrew_installed
+
+    - name: Display homebrew installation status
+      debug:
+        msg: "Homebrew is already installed"
+      when: homebrew_installed
+
+    - name: Display homebrew installation completion message
+      debug:
+        msg: "Homebrew has been installed"
+      when: not homebrew_installed
 
     - name: Install htop using Homebrew
       homebrew:
         name: 
+          - gcc
           - htop
           - ripgrep
           - tlrc
@@ -80,16 +106,6 @@
           - zsh-syntax-highlighting
           - thefuck
           - fastfetch
-        state: present
-      become: true
-      become_user: lkims
-      environment:
-        PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
-        HOME: "/home/lkims"
-
-    - name: Install p10k using Homebrew
-      homebrew:
-        name: 
           - powerlevel10k
         state: present
       become: true
@@ -105,7 +121,6 @@
         owner: lkims
         group: lkims
       become: true
-
 
     - name: Ensure custom fonts directory exists
       file:
