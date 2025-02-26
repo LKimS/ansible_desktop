@@ -20,6 +20,9 @@
         update_homebrew: true
         upgrade_all: true
       become_user: lkims
+      environment:
+        PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+        HOME: "/home/lkims"
 
   tasks:
     - include: tasks/users.yml
