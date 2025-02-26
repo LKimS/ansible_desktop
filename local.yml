@@ -13,7 +13,7 @@
     - name: update flatpak
       flatpak:
         state: latest
-        methos: system
+        method: system
 
   tasks:
     - include: tasks/users.yml
