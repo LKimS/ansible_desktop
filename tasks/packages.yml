@@ -20,7 +20,7 @@
     shell: /bin/zsh
 
 
-- name: Install htop using Homebrew
+- name: Install packages using Homebrew
   homebrew:
     name: 
       # for homebrew post install
