@@ -52,22 +52,24 @@
     state: present
 
 - name: Install packages using Flatpak
-  community.general.flatpak:
-    name: 
-      - com.brave.Browser
-      - com.valvesoftware.Steam
-      - com.github.iwalton3.jellyfin-media-player
-      - com.discordapp.Discord
-      - com.github.tchx84.Flatseal
-      - com.heroicgameslauncher.hgl
-      - com.mattjakeman.ExtensionManager
-      - com.protonvpn.www
-      - com.rustdesk.RustDesk
-      - com.visualstudio.code
-      - dev.deedles.Trayscale
-      - io.mpv.Mpv
-      - md.obsidian.Obsidian
-      - org.filezillaproject.Filezilla
-      - org.keepassxc.KeePassXC
-      - org.localsend.localsend_app
+  flatpak:
+    name: "{{ item }}"
     state: present
+    method: system
+  loop:
+    - com.brave.Browser
+    - com.valvesoftware.Steam
+    - com.github.iwalton3.jellyfin-media-player
+    - com.discordapp.Discord
+    - com.github.tchx84.Flatseal
+    - com.heroicgameslauncher.hgl
+    - com.mattjakeman.ExtensionManager
+    - com.protonvpn.www
+    - com.rustdesk.RustDesk
+    - com.visualstudio.code
+    - dev.deedles.Trayscale
+    - io.mpv.Mpv
+    - md.obsidian.Obsidian
+    - org.filezillaproject.Filezilla
+    - org.keepassxc.KeePassXC
+    - org.localsend.localsend_app
