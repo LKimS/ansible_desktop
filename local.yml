@@ -19,6 +19,7 @@
       homebrew:
         update_homebrew: true
         upgrade_all: true
+      become_user: lkims
 
   tasks:
     - include: tasks/users.yml
