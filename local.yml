@@ -10,11 +10,6 @@
         upgrade: dist
         cache_valid_time: 3600
 
-    - name: Upgrade all flatpaks 📅
-      command: flatpak update --noninteractive
-      register: flatpak_update_output
-      changed_when: "'app/' in flatpak_update_output.stdout
-
   tasks:
     - include: tasks/users.yml
     - include: tasks/packages.yml
