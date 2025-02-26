@@ -44,22 +44,6 @@
         path: /home/linuxbrew/.linuxbrew/bin/brew
       register: homebrew_installed
 
-    - name: Ensuer sodoers.d directory exists
-      file: 
-        path: /etc/sudoers.d
-        state: directory
-        mode: '0755'
-      when: not homebrew_installed.stat.exists
-
-    - name: Add NPOASSWD sodu access for Anisble user
-      lineinfile:
-        path: /etc/soduers.d/ansible-homebrew
-        line: "lkims ALL=(ALL) NOPASSWD: ALL"
-        create: yes
-        validate: 'visodu -cf %s'
-        mode: '0440'
-      when: not homebrew_installed.stat.exists
-
     - name: Download Homebrew installation script
       get_url:
         url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
@@ -71,7 +55,7 @@
 
     - name: Run Homebrew installer
       become: no
-      become_user: lkims
+      become_user: velociraptor
       shell: /bin/bash /tmp/homebrew_install.sh
       when: not homebrew_installed.stat.exists
 
