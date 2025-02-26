@@ -162,13 +162,6 @@
         key: "/org/gnome/desktop/interface/clock-format"
         value: "'24h'"
 
-    - name: Add Flathub repository
-      flatpak_remote:
-        name: flathub
-        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-        method: system
-        state: present
-
     - name: Install packages using Flatpak
       flatpak:
         name: 
