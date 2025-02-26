@@ -51,7 +51,7 @@
         mode: '0755'
       when: not homebrew_installed
 
-    - Name: Add NPOASSWD sodu access for Anisble user
+    - name: Add NPOASSWD sodu access for Anisble user
       lineinfile:
         path: /etc/soduers.d/ansible-homebrew
         line: "lkims ALL=(ALL) NOPASSWD: ALL"
