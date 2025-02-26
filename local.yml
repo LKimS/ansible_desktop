@@ -49,7 +49,7 @@
         path: /etc/sudoers.d
         state: direcoty
         mode: '0755'
-      when: not homebrew_installed
+      when: not homebrew_installed.stat.exist
 
     - name: Add NPOASSWD sodu access for Anisble user
       lineinfile:
@@ -58,7 +58,7 @@
         create: yes
         validate: 'visodu -cf %s'
         mode: '0440'
-      when: not homebrew_installed
+      when: not homebrew_installed.stat.exist
 
     - name: Download Homebrew installation script
       get_url:
@@ -67,30 +67,30 @@
         mode: '0755'
       become: false
       become_user: lkims
-      when: not homebrew_installed
+      when: not homebrew_installed.stat.exist
 
     - name: Run Homebrew installer
       become: no
       become_user: lkims
       shell: /bin/bash /tmp/homebrew_install.sh
-      when: not homebrew_installed
+      when: not homebrew_installed.stat.exist
 
     - name: Cleanup Homebrew installation script
       file:
         path: /tmp/homebrew_install.sh
         state: absent
       become: false
-      when: not homebrew_installed
+      when: not homebrew_installed.stat.exist
 
     - name: Display homebrew installation status
       debug:
         msg: "Homebrew is already installed"
-      when: homebrew_installed
+      when: homebrew_installed.stat.exist
 
     - name: Display homebrew installation completion message
       debug:
         msg: "Homebrew has been installed"
-      when: not homebrew_installed
+      when: not homebrew_installed.stat.exist
 
     - name: Install htop using Homebrew
       homebrew:
