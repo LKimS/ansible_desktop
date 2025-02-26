@@ -166,7 +166,7 @@
       when: not miniconda_installed.stat.exists
 
     - name: Run miniconda installer
-      shell: bash /tmp/miniconda.sh -b -p ~/miniconda3
+      shell: /bin/bash /tmp/miniconda.sh -b -u -p ~/miniconda3
       args:
         creates: ~/miniconda3
       when: not miniconda_installed.stat.exists
