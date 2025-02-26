@@ -107,6 +107,13 @@
       become: false
       become_user: lkims
 
+    - name: Ensure custom fonts directory exists
+      file:
+        path: "/usr/local/share/fonts/custom"
+        state: directory
+        mode: '0755'
+      when: font_file_status.stat.exists
+
     - name: copy font files file
       copy:
         src: "files/fonts/MesloLGS NF Italic.ttf"
