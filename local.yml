@@ -170,3 +170,8 @@
       loop:
         - com.brave.Browser
         - com.valvesoftware.Steam
+
+    - name: Set Brave as default browser
+      become: true
+      become_user: lkims
+      command: xdg-settings set default-web-browser com.brave.Browser
