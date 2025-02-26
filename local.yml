@@ -15,7 +15,7 @@
       register: flatpak_update_output
       changed_when: "'app/' in flatpak_update_output.stdout"
 
-    - name: Install htop using Homebrew
+    - name: Update homebrew packages
       homebrew:
         update_homebrew: true
         upgrade_all: true
@@ -28,8 +28,9 @@
     - include: tasks/users.yml
     - include: tasks/packages.yml
     - include: tasks/miniconda.yml
-    - include: tasks/change_terminal.yml
     - include: tasks/desktop_env.yml
+    - include: tasks/change_terminal.yml
+
 
 
     
