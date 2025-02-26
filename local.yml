@@ -80,9 +80,30 @@
           - htop
           - ripgrep
           - tlrc
+          - bat
         state: present
       become: true
       become_user: lkims
       environment:
         PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
         HOME: "/home/lkims"
+
+    - name: Install p10k using Homebrew
+      homebrew:
+        name: 
+          - powerlevel10k
+        state: present
+      become: true
+      become_user: lkims
+      environment:
+        PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+        HOME: "/home/lkims"
+
+    - name: Add p10k to PATH
+      lineinfile:
+        path: /home/lkims/.zshrc
+        line: 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme'
+        state: present
+      become: false
+      become_user: lkims
+  
