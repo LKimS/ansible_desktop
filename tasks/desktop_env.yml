@@ -3,6 +3,11 @@
     name: dconf-cli
     state: present
 
+- name: install gnome-extensions-cli
+  community.general.pipx:
+    name: gnome-extensions-cli
+    pip-args: "--system-site-packages"
+
 - name: set 24h
   become_user: lkims
   dconf:
@@ -24,4 +29,9 @@
 - name: Downlaod gnome extensions
   become_user: lkims
   command:
-    cmd: gnome-extensions install 1400
+    cmd: gext install 1400
+
+- name: Enable extensions
+  become_user: lkims
+  command:
+    cmd: gext enable 1400
