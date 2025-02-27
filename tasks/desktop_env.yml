@@ -20,3 +20,8 @@
   dconf:
     key: "/org/gnome/desktop/peripheral/mouse/accel-profrile"
     value: "'flat'"
+
+- name: Downlaod gnome extensions
+  become_user: lkims
+  command:
+    cmd: gnome-extensions install 1400
