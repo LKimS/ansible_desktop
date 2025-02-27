@@ -4,7 +4,7 @@
     state: present
 
 - name: Install gnome-extension-cli
-  pipx:
+  community.general.pipx:
     name: gnome-extensions-cli
     pip-args: '--system-site-packages'
 
