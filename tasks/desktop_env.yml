@@ -4,8 +4,9 @@
     state: present
 
 - name: Install gnome-extension-cli
-  community.general.pipx:
-    name: gnome-extensions-cli
+  apt:
+    update_cache: false
+
 - name: set 24h
   become_user: lkims
   dconf:
