@@ -59,7 +59,6 @@
     method: system
   loop:
     - com.brave.Browser
-    - com.valvesoftware.Steam
     - com.github.iwalton3.jellyfin-media-player
     - com.discordapp.Discord
     - com.github.tchx84.Flatseal

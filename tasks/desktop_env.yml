@@ -3,10 +3,6 @@
     name: dconf-cli
     state: present
 
-- name: Install gnome-extension-cli
-  pip:
-    name: gnome-extensions-cli
-
 - name: set 24h
   become_user: lkims
   dconf:
@@ -24,13 +20,3 @@
   dconf:
     key: "/org/gnome/desktop/peripheral/mouse/accel-profrile"
     value: "'flat'"
-
-- name: Downlaod gnome extensions
-  become_user: lkims
-  command:
-    cmd: gext install 1400
-
-- name: Enable extensions
-  become_user: lkims
-  command:
-    cmd: gext enable 1400
