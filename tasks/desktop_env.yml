@@ -4,8 +4,9 @@
     state: present
 
 - name: Install gnome-extension-cli
-  apt:
-    update_cache: false
+  pipx:
+    name: gnome-extensions-cli
+    pip-args: '--system-site-packages'
 
 - name: set 24h
   become_user: lkims
