@@ -12,6 +12,7 @@
       # other
       - zsh
       - htop
+      - pipx
     state: latest
 
 - name: change user shell to zsh 
