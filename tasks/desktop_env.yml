@@ -6,8 +6,6 @@
 - name: Install gnome-extension-cli
   community.general.pipx:
     name: gnome-extensions-cli
-    pip-args: '--system-site-packages'
-
 - name: set 24h
   become_user: lkims
   dconf:
