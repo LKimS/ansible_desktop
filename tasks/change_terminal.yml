@@ -20,6 +20,10 @@
     group: root
     mode: '0644'
 
+- name: Update font cache
+  ansible.builtin.command: fc-cache -f -v
+
+
 - name: set terminal font
   become_user: lkims
   dconf:
