@@ -37,6 +37,7 @@
       - thefuck
       - fastfetch
       - powerlevel10k
+      - neovim
     state: latest
   become: true
   become_user: lkims
