@@ -49,6 +49,9 @@ alias la='ls -A'
 alias l='ls -CF'
 alias updateall='sudo apt update && sudo apt upgrade && brew update && brew upgrade && flatpak update'
 
+# alias for applications
+alias code='flatpak run com.visualstudio.code'
+
 
 
 # >>> conda initialize >>>
