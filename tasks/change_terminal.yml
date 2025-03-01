@@ -19,9 +19,11 @@
     owner: root
     group: root
     mode: '0644'
+  register: fonts_copy
 
 - name: Update font cache
   ansible.builtin.command: fc-cache -f -v
+  when: fonts_copy.changed
 
 
 - name: set terminal font
