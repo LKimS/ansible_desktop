@@ -25,14 +25,6 @@
         PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
         HOME: "/home/lkims"
 
-
-  vars:
-    force_color: true
-  tasks:
-    - name: Check if ANSIBLE_FORCE_COLOR setting is set
-      debug:
-        msg: "{{ lookup('config', 'ANSIBLE_FORCE_COLOR') | bool }}"
-
   
     - include_tasks: tasks/users.yml
     - include_tasks: tasks/packages.yml
