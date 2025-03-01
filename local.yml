@@ -25,6 +25,11 @@
         HOME: "/home/lkims"
 
   tasks:
+    - name: Check if ANSIBLE_FORCE_COLOR setting is set
+      debug:
+        msg: "{{ lookup('config', 'ANSIBLE_FORCE_COLOR') | bool }}"
+
+  
     - include_tasks: tasks/users.yml
     - include_tasks: tasks/packages.yml
     - include_tasks: tasks/miniconda.yml
