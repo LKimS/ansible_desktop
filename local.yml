@@ -25,11 +25,11 @@
         HOME: "/home/lkims"
 
   tasks:
-    - include: tasks/users.yml
-    - include: tasks/packages.yml
-    - include: tasks/miniconda.yml
-    - include: tasks/desktop_env.yml
-    - include: tasks/change_terminal.yml
+    - include_tasks: tasks/users.yml
+    - include_tasks: tasks/packages.yml
+    - include_tasks: tasks/miniconda.yml
+    - include_tasks: tasks/desktop_env.yml
+    - include_tasks: tasks/change_terminal.yml
 
 
 
