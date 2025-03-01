@@ -74,3 +74,4 @@
     - org.keepassxc.KeePassXC
     - org.localsend.localsend_app
     - fr.romainvigier.MetadataCleaner
+    - com.github.unrud.VideoDownloader
