@@ -3,7 +3,7 @@
   connection: local
   become: true
   vars:
-    ANSIBLE_FORCE_COLOR: true
+    ANSIBLE_FORCE_COLOR: "'true'"
 
   pre_tasks:
     - name: update repositories
