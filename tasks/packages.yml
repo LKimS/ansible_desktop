@@ -54,8 +54,8 @@
     state: present
 
 - name: Install packages using Flatpak
-  flatpak:
   become_user: lkims
+  flatpak:
     name: "{{ item }}"
     state: present
     method: user
