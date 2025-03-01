@@ -27,7 +27,7 @@
 
 
   vars:
-    ANSIBLE_FORCE_COLOR: true
+    force_color: true
   tasks:
     - name: Check if ANSIBLE_FORCE_COLOR setting is set
       debug:
