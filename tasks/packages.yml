@@ -49,14 +49,14 @@
   flatpak_remote:
     name: flathub
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: system
+    method: user
     state: present
 
 - name: Install packages using Flatpak
   flatpak:
     name: "{{ item }}"
     state: present
-    method: system
+    method: user
   loop:
     - com.brave.Browser
     - com.github.iwalton3.jellyfin-media-player
