@@ -12,7 +12,7 @@
       # other
       - zsh
       - htop
-      state: latest
+    state: latest
 
 - name: change user shell to zsh 
   user:
