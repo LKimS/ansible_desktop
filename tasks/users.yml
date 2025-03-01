@@ -10,3 +10,11 @@
     owner: root
     group: root
     mode: 0440
+
+- name: set up sodu path for brew applications
+  copy:
+    src: files/sudoer_lkims
+    dest: /etc/sudoers.d/lkims
+    owner: root
+    group: root
+    mode: 0440
