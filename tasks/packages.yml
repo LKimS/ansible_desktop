@@ -46,6 +46,7 @@
 
 
 - name: Add Flathub repository
+  become_user: lkims
   flatpak_remote:
     name: flathub
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
@@ -54,6 +55,7 @@
 
 - name: Install packages using Flatpak
   flatpak:
+  become_user: lkims
     name: "{{ item }}"
     state: present
     method: user
