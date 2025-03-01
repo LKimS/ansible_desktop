@@ -12,7 +12,7 @@
       # other
       - zsh
       - htop
-      - pipx
+      - wireguard
     state: latest
 
 - name: change user shell to zsh 
