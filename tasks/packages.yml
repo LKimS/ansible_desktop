@@ -12,8 +12,7 @@
       # other
       - zsh
       - htop
-      - wireguard
-    state: latest
+      state: latest
 
 - name: change user shell to zsh 
   user:
