@@ -2,8 +2,7 @@
 - hosts: localhost
   connection: local
   become: true
-  vars:
-    ANSIBLE_FORCE_COLOR: "'true'"
+
 
   pre_tasks:
     - name: update repositories
@@ -26,6 +25,9 @@
         PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
         HOME: "/home/lkims"
 
+
+  vars:
+    ANSIBLE_FORCE_COLOR: true
   tasks:
     - name: Check if ANSIBLE_FORCE_COLOR setting is set
       debug:
