@@ -12,6 +12,8 @@
       # other
       - zsh
       - htop
+      # for ansible
+      - sshpass
     state: latest
 
 - name: change user shell to zsh 
