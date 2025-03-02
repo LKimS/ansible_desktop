@@ -47,6 +47,8 @@ alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
 
+alias ansible-pull-pop='sudo ansible-pull -U https://github.com/lkims/ansible_desktop.git'
+
 
 # Package management
 if [ -f /usr/bin/apt ]; then
