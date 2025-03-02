@@ -53,7 +53,7 @@ alias ansible-pull-pop='sudo ansible-pull -U https://github.com/lkims/ansible_de
 # Package management
 if [ -f /usr/bin/apt ]; then
   alias update='sudo apt update'
-  alias upgrade='sudo apt update && sudo apt dist-upgrade && sudo apt autoremove && sudo apt clean'
+  alias upgrade='sudo apt update && sudo apt autoremove && sudo apt clean'
   alias install='sudo apt install'
 fi
 
