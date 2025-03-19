@@ -39,6 +39,7 @@
       - fastfetch
       - powerlevel10k
       - neovim
+      - eza
     state: latest
   become: true
   become_user: lkims
