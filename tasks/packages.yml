@@ -84,3 +84,6 @@
     - io.missioncenter.MissionCenter
     - org.gnome.Boxes
     - org.gnome.DejaDup
+    - io.github.flattool.Ignition
+    - io.github.idevecore.Valuta
+
